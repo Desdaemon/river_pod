@@ -1,0 +1,152 @@
+---
+title: Bắt đầu
+---
+
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+import CodeBlock from "@theme/CodeBlock";
+import helloWorldHooks from "!!raw-loader!/docs/getting_started_hello_world_hooks.dart";
+import helloWorldFlutter from "!!raw-loader!/docs/getting_started_hello_world_flutter.dart";
+import helloWorldDart from "!!raw-loader!/docs/getting_started_hello_world_dart.dart";
+import { trimSnippet } from "../../../../src/components/CodeSnippet";
+
+Trước khi đi vào chi tiết của [Riverpod], chúng ta sẽ bắt đầu từ cơ bản: Cài đặt
+[Riverpod], và viết một app "Hello world".
+
+## Chọn package để cài đặt
+
+Đầu tiên, bạn cần chú ý rằng [Riverpod] trải khắp nhiều package với các cách sử
+dụng khác nhau. Loại [Riverpod] bạn cần cài đặt sẽ phụ thuộc vào loại app bạn
+đang viết.
+
+Bạn có thể tham khảo bảng này để lựa chọn package phù hợp:
+
+| loại app                    | tên package                                                                        | mô tả                                                          |
+| --------------------------- | ---------------------------------------------------------------------------------- | -------------------------------------------------------------- |
+| Flutter + [flutter_hooks]   | [hooks_riverpod]                                                                   | Cho phép sử dụng đồng thời [flutter_hooks] và [Riverpod]       |
+| chỉ Flutter                 | [flutter_riverpod]                                                                 | Phương pháp sử dụng [Riverpod] cơ bản dành cho các app Flutter |
+| chỉ Dart (không có Flutter) | [riverpod](https://github.com/rrousselGit/river_pod/tree/master/packages/riverpod) | [Riverpod] lược bỏ các class liên quan đến Flutter             |
+
+## Cài đặt package
+
+Khi bạn đã quyết định được nên cài package nào, thêm những dòng sau vào
+`pubspec.yaml` của bạn:
+
+<Tabs
+  groupId="riverpod"
+  defaultValue="hooks_riverpod"
+  values={[
+    { label: 'Flutter + flutter_hooks', value: 'hooks_riverpod', },
+    { label: 'Flutter', value: 'flutter_riverpod', },
+    { label: 'chỉ Dart', value: 'riverpod', },
+  ]}
+>
+<TabItem value="hooks_riverpod">
+
+```yaml title="pubspec.yaml"
+environment:
+  sdk: ">=2.12.0 <3.0.0"
+  flutter: ">=2.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_hooks: ^0.18.0
+  hooks_riverpod: ^2.0.0-dev.0
+```
+
+Rồi chạy `flutter pub get`.
+
+</TabItem>
+<TabItem value="flutter_riverpod">
+
+```yaml title="pubspec.yaml"
+environment:
+  sdk: ">=2.12.0 <3.0.0"
+  flutter: ">=2.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_riverpod: ^2.0.0-dev.0
+```
+
+Rồi chạy `flutter pub get`.
+
+</TabItem>
+<TabItem value="riverpod">
+
+```yaml title="pubspec.yaml"
+environment:
+  sdk: ">=2.12.0-0 <3.0.0"
+
+dependencies:
+  riverpod: ^2.0.0-dev.0
+```
+
+Rồi chạy `pub get`.
+
+</TabItem>
+</Tabs>
+
+Vậy thôi, bạn đã thêm [Riverpod] vào app của bạn!
+
+## Ví dụ: Hello world
+
+Bây giờ chúng ta đã cài đặt [Riverpod], hãy bắt đầu sử dụng nó.
+
+Đoạn code sau biểu diễn cách sử dụng thư viện chúng ta mới thêm vào để viết một
+"Hello world":
+
+export const foo = 42;
+
+<Tabs
+  groupId="riverpod"
+  defaultValue="hooks_riverpod"
+  values={[
+    { label: "Flutter + flutter_hooks", value: "hooks_riverpod" },
+    { label: "Flutter", value: "flutter_riverpod" },
+    { label: "chỉ Dart", value: "riverpod" },
+  ]}
+>
+<TabItem value="hooks_riverpod">
+
+<CodeBlock title="lib/main.dart">{trimSnippet(helloWorldHooks)}</CodeBlock>
+
+Bạn có thể chạy đoạn code này với `flutter run`.  
+Một dòng chữ "Hello world" sẽ hiện trên màn hình.
+
+</TabItem>
+<TabItem value="flutter_riverpod">
+
+<CodeBlock title="lib/main.dart">{trimSnippet(helloWorldFlutter)}</CodeBlock>
+
+Bạn có thể chạy đoạn code này với `flutter run`.  
+Một dòng chữ "Hello world" sẽ hiện trên màn hình.
+
+</TabItem>
+<TabItem value="riverpod">
+
+<CodeBlock title="lib/main.dart">{trimSnippet(helloWorldDart)}</CodeBlock>
+
+Bạn có thể chạy đoạn code này với `dart lib/main.dart`.  
+Một dòng chữ "Hello world" sẽ hiện trên màn hình.
+
+</TabItem>
+</Tabs>
+
+## Ngoài lề: Cài đặt code snippet
+
+Nếu bạn đang sử dụng `Flutter` và `VSCode`, cân nhắc sử dụng
+[Flutter Riverpod Snippets](https://marketplace.visualstudio.com/items?itemName=robert-brunhage.flutter-riverpod-snippets)
+
+Nếu bạn đang sử dụng `Flutter` và `Android Studio` hay `IntelliJ`, cân nhắc sử
+dụng
+[Flutter Riverpod Snippets](https://plugins.jetbrains.com/plugin/14641-flutter-riverpod-snippets)
+
+![img](/img/snippets/greetingProvider.gif)
+
+[riverpod]: https://github.com/rrousselgit/river_pod
+[hooks_riverpod]: https://pub.dev/packages/hooks_riverpod
+[flutter_riverpod]: https://pub.dev/packages/flutter_riverpod
+[flutter_hooks]: https://github.com/rrousselGit/flutter_hooks
